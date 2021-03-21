@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>	
+<head>
+<style>
+p {color:blue;}
+#form2 {display:none;}
+#form3 {display:none;}
+</style>	
 </head>
 <body>
 <header>
 	<a href="{% url 'home' %}">Home</a> |
-	<a href="{% url 'form1' %}">Form_example</a> |
+	<a href="{% url 'form' %}">Form_example</a> |
 </header>
 {% block content %}
 {% endblock content %}

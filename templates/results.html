@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <h1>This is the results page!</h1>
+<p>Data of Form1</p>
 <ul>
-<li>{{ka}}</li>
-<li>{{humusz}}</li>
+<li>KA: {{ka}}</li>
+<li>H%: {{humusz}}</li>
+</ul>
+<p>Data of Form2</p>
+<ul>
+<li>PH: {{ph}}</li>
+<li>THK: {{thk}}</li>
+</ul>
+<p>Data of Form3</p>
+<ul>
+<li>P2O5: {{p2o5}}</li>
+<li>K2O: {{k2o}}</li>
 </ul>
 {% endblock content %}

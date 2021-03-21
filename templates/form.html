@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>This is the form!</h1>
+<form action = '/results/' method = "post">
+<div id="form1"> 
+{% csrf_token %}
+{{form1.as_p}}
+<input type="submit" name="f1" value="Tovább" onclick="displayForm(this);test(this);">
+</div>
+<div id="form2"> 
+{% csrf_token %}
+{{form2.as_p}}
+<input type="submit" name="f2" value="Tovább" onclick="displayForm(this);">
+</div>
+<div id="form3"> 
+{% csrf_token %}
+{{form3.as_p}}
+<input type="submit" value="Eredmények" onclick="">
+</div>
+</form>
+
+<script>
+
+var i = 0;
+
+function displayForm(obj) {
+
+	//var j = 0;
+	//var p1 = document.getElementsByTagName("INPUT")[j].getAttribute("name");
+	//var p2 = document.getElementsByTagName("INPUT")[j].getAttribute("name");
+	
+	if (obj.name == "f1") {
+		var p1 =  "Ka";
+		var p2 =  "Humusz";
+	}
+
+	if (obj.name == "f2") {
+		var p1 = "Ph";
+		var p2 = "Thk"; 
+	}
+
+	var param1 = document.getElementsByName(p1)[0].value;
+	var param2 = document.getElementsByName(p2)[0].value;
+
+	var actlForm = document.getElementsByTagName("DIV")[i].getAttribute("id");
+	var nextForm = actlForm.slice(0,-1) + String(parseInt(actlForm.substr(actlForm.length-1))+1);
+	//alert(actlForm + ' ' + nextForm);
+	
+	if (param1 == '' || param2 == '')
+		return alert(" Az űrlapot ki kell tölteni! ");
+	else {
+		var disapp = document.getElementById(actlForm);
+		disapp.style.display = "none";
+
+		var disapp = document.getElementById(nextForm);
+		disapp.style.display = "block";
+	}
+	
+	i++;
+}
+
+function test(obj){
+	
+	var i = 0;
+	var arr = new Array();
+	
+	while(true){
+		var testVar = document.getElementsByTagName("INPUT")[i].getAttribute("name");
+		arr[i] = testVar;
+		//alert(arr[i]);
+		i++;
+	}		
+}
+
+</script>
+
+{% endblock content %}
