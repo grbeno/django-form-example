@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .forms import DemoForm_1, DemoForm_2, DemoForm_3
+from .models import Projectname, Modelform1
 
 " Some template views "
 
@@ -39,24 +40,34 @@ def getForm(request):
 		form3 = DemoForm_3()
 	return render(request,'form.html',{'form1': form1, 'form2': form2, 'form3': form3})
 
+
 def getData(request):
 	" Get data from form "
 	context = {}
 	if request.method == 'POST':
-		
+
 		form1 = DemoForm_1(request.POST)
-		ka = form1['Ka'].value()
-		humusz = form1['Humusz'].value()
+		project = form1['project'].value()
+		form1.save()
+		#project = Projectname.objects.all()
 
 		form2 = DemoForm_2(request.POST)
-		ph = form2['Ph'].value()
-		thk = form2['Thk'].value()
+		ph = form2['ph'].value()
+		thk = form2['thk'].value()
+		ka = form2['ka'].value()
+		humusz = form2['humusz'].value()
+		form2.save()
+		#params1 = Modelform1.objects.all()
+		params1 = [ph,thk,ka,humusz]
 
 		form3 = DemoForm_3(request.POST)
-		p2o5 = form3['P2o5'].value()
-		k2o = form3['K2o'].value()
+		p2o5 = form3['p2o5'].value()
+		k2o = form3['k2o'].value()
+		form3.save()
+		params2 = [p2o5,k2o] 
 		
-		context = {'ka':ka,'humusz':humusz,'ph':ph,'thk':thk, 'p2o5':p2o5,'k2o':k2o, }
+		context = {'project': project, 'params1': params1, 'params2': params2, }
+		
 	else:
 		form1 = DemoForm_1()
 		form2 = DemoForm_2()
@@ -66,52 +77,5 @@ def getData(request):
 	return render(request,'results.html',context)
 
 
-
-
-""" def getForm_1(request):
-	" Create form in Django "
-	if request.method == 'POST':
-		form1 = DemoForm_1(request.POST)
-	else:
-		form1 = DemoForm_1()
-	return render(request,'form1.html',{'form': form1})
-
-def getForm_2(request):
-	" Create form in Django "
-	if request.method == 'POST':
-		form2 = DemoForm_2(request.POST)
-	else:
-		form2 = DemoForm_2()
-	return render(request,'form1.html',{'form': form2}) """
-
-
-
-""" def getData_1(request):
-	" Get data from form "
-	context = {}
-	if request.method == 'POST':
-		" It works too: "
-		form = DemoForm_1(request.POST)
-		ka = form['Ka'].value()
-		humusz = form['Humusz'].value()
-		context = {'ka':ka,'humusz':humusz, }
-	else:
-		form = DemoForm_1()
-		return redirect('/form1/')
-	return render(request,'results.html',context)
-
-def getData_2(request):
-	" Get data from form "
-	context = {}
-	if request.method == 'POST':
-		" It works too: "
-		form = DemoForm_2(request.POST)
-		ph = form['Ph'].value()
-		thk = form['Thk'].value()
-		context = {'ph':ph,'thk':thk, }
-	else:
-		form = DemoForm_2()
-		return redirect('/form2/')
-	return render(request,'results.html',context) """
 
 	
