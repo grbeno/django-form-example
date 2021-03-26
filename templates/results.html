@@ -1,22 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>This is the results page!</h1>
-<!--p>Data of Form1</p>
-<ul>
-<li>Project: {{project}}</li>
-</ul-->
-<p>Data of Form2</p>
-<ul>
-<li>PH: {{ph}}</li>
-<li>THK: {{thk}}</li>
-<li>KA: {{ka}}</li>
-<li>H%: {{humusz}}</li>
-</ul>
-<p>Data of Form3</p>
-<ul>
-<li>P2O5: {{p2o5}}</li>
-<li>K2O: {{k2o}}</li>
-</ul>
 <p>Model Test:</p>
 <table id="res">
 <tr>
@@ -30,15 +14,25 @@
 </tr>
 <tr>
     <td colspan=7 style="border-bottom: 1px solid #000000;"></td>
-<tr>
-<tr>
-    <td>{{ project }}</td>
-    {% for p1s in params1 %} 
-        <td>{{ p1s }}</td>
+</tr>
+{% for project,param1,param2 in group %}     
+    <tr>
+        <td>{{ project.project }}</td>  
+        <td>{{ param1.ph }}</td>
+        <td>{{ param1.thk }}</td>
+        <td>{{ param1.ka }}</td>
+        <td>{{ param1.humusz }}</td> 
+        <td>{{ param2.p2o5 }}</td>
+        <td>{{ param2.k2o }}</td>
+    </tr>
     {% endfor %}
-    {% for p2s in params2 %} 
-        <td>{{ p2s }}</td>
-    {% endfor %}
+<tr>
+    <td colspan=7 style="border-bottom: 1px solid #000000;"></td>
+</tr>
+<tr>
+    <td colspan=5></td>
+    <td><a class="mybutton" href="{% url 'next_data'%}">Next Datas</a></td>
+    <td><a class="mybutton" href="{% url 'clear_data'%}">New Project</a></td>
 </tr>
 </table>
 {% endblock content %}

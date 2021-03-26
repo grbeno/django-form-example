@@ -1,11 +1,14 @@
 from django.urls import path
-from .views import HomePageView, Form1PageView, Form2PageView, ResultsPageView, getForm, getData
+from .views import HomePageView, Form1PageView, Form2PageView, ResultsPageView, getForm, getData, next_data, clear_data
 
 urlpatterns = [ path('', HomePageView.as_view(), name='home'),
 				
 				path('form/', getForm, name='form'),
 				path('results/', getData, name='results'),
 
+				path('next_data', next_data, name='next_data'),
+				path('clear_data', clear_data, name='clear_data'),
+
 				path('form1/', Form1PageView.as_view(), name='form1'),
 				path('form2/', Form2PageView.as_view(), name='form2'),
-				path('results/', ResultsPageView.as_view(), name='results'),]
+				path('results/', ResultsPageView.as_view(), name='results'), ]

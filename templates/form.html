@@ -20,20 +20,6 @@
 
 <script>
 
-function getInputIds(div) {
-	var arr = new Array(6);
-	var len = 4
-	for (var i = 0; i < len; i++) {
-		var MyInputs = div.getElementsByTagName("INPUT")[i].getAttribute("name");
-		if (MyInputs !== null)
-			arr.fill(MyInputs);
-		else {
-			continue;
-		}
-	alert(arr[i]);
-	}
-}
-
 var i = 0;
 
 function displayForm(obj) {
