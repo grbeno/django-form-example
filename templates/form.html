@@ -19,18 +19,21 @@
 		<table>
 			{{form3.as_table}}
 		</table>
-		<input type="submit" value="Eredmények">
+		<input type="submit" name="f3" value="Eredmények" onclick="displayForm();">
 	</div>
 </form>
 
 <script>
 
 function checkInput(div) {
+	
 	/* check empty input values */
+	
 	var inputs = div.getElementsByTagName("INPUT");
 	var len = inputs.length;
 
 	/* input values: not 0 & not the last! */
+	
 	for (var i = 1; i < len-1; i++) {
 		var name = inputs[i].getAttribute("name");
 		if (document.getElementsByName(name)[0].value == '')
@@ -44,9 +47,12 @@ var i = 0;
 function displayForm() {
 
 	/* div id */
+	
 	var div = document.getElementsByTagName("DIV")[i];
 	var actlForm = div.getAttribute("id");
+	
 	/* next div id */
+	
 	var nextForm = actlForm.slice(0,-1) + String(parseInt(actlForm.substr(actlForm.length-1))+1);
 	
 	if (checkInput(div) != 0)
