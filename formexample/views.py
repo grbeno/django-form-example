@@ -38,6 +38,7 @@ def getForm(request):
 		form1 = DemoForm_1()
 		form2 = DemoForm_2()
 		form3 = DemoForm_3()
+	
 	return render(request,'form.html',{'form1': form1, 'form2': form2, 'form3': form3})
 
 def getData(request):
