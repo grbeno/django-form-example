@@ -23,11 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'w9s7e(#_@+i!s@vru@fu0c49l*$1tdtf6glfgzp@!bgxy8ndn_'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'w9s7e(#_@+i!s@vru@fu0c49l*$1tdtf6glfgzp@!bgxy8ndn_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -52,12 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
-    'whitenoise.runserver_nostatic',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'config.urls'
 
@@ -90,7 +84,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
     }
 } """
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydata',
@@ -99,10 +93,10 @@ DATABASES = {
         'HOST': 'https://formexample.herokuapp.com', #'localhost',
         'PORT': '5432',
     }
-}
+} """
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
