@@ -61,6 +61,8 @@ def getData(request):
 		
 		context['group'] = zip(project,param1,param2)
 		
+		print(list(param1.values('ph','thk','ka','humusz'))) # list of dictionaries
+	
 	else:
 		
 		form1 = DemoForm_1()
