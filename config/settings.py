@@ -27,7 +27,7 @@ SECRET_KEY = 'w9s7e(#_@+i!s@vru@fu0c49l*$1tdtf6glfgzp@!bgxy8ndn_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -76,13 +76,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+} """
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydata',
+        'USER': 'postgres',
+        'PASSWORD': '1875',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
