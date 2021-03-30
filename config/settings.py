@@ -79,10 +79,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 db_config = dj_database_url.config(conn_max_age=600)
 if db_config:
-    # Postgre:
+    # Postgre @ heroku:
     DATABASES = {}
     DATABASES['default'] =  db_config
 else:
+    # Sqlite3 @ local:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
