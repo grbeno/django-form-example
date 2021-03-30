@@ -14,14 +14,9 @@ from pathlib import Path
 import os 
 import django_heroku
 import dj_database_url
-#import dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-""" dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file, encoding='ISO-8859-1') """
     
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -79,24 +74,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+db_config = dj_database_url.config(conn_max_age=600)
+if db_config:
+    # Postgre:
+    DATABASES = {}
+    DATABASES['default'] =  db_config
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-db_config = dj_database_url.config(conn_max_age=600)
-if db_config:
-    DATABASES = {}
-    DATABASES['default'] =  db_config
-
-#DATABASES = {}
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -139,5 +131,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
 
+# Postgre ?
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)

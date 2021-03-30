@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Form for testing Django!</h1>
+<h1>Django ModelForm tesztelése</h1>
+<h3>Testing Django ModelForm</h3>
 
 <form action = '/results/' method = "post">
 	<div id="form1">{% csrf_token %}
 		<table>
 			{{form1.as_table}}
-			<tr><th></th><td><input type="submit" name="f1" value="Tovább" onclick="displayForm();"></td></tr>
+			<tr><th></th><td><input type="submit" name="f1" value="Tovább / Next" onclick="displayForm();"></td></tr>
 		</table>
 	</div>
 	<div id="form2">{% csrf_token %}
 		<table>
 			{{form2.as_table}}
-			<tr><th></th><td><input type="submit" name="f2" value="Tovább" onclick="displayForm();"></td></tr>
+			<tr><th></th><td><input type="submit" name="f2" value="Tovább / Next" onclick="displayForm();"></td></tr>
 		</table>
 	</div>
 	<div id="form3">{% csrf_token %}
 		<table>
 			{{form3.as_table}}
-			<tr><th></th><td><input type="submit" name="f3" value="Tovább" onclick="displayForm();"></td></tr>
+			<tr><th></th><td><input type="submit" name="f3" value="Eredmények / Results" onclick="displayForm();"></td></tr>
 		</table>
 	</div>
 </form>
@@ -56,7 +57,7 @@
 		var nextForm = actlForm.slice(0,-1) + String(parseInt(actlForm.substr(actlForm.length-1))+1);
 		
 		if (checkInput(div) != 0)
-			return alert(" Az űrlapot ki kell tölteni! ");
+			return alert("Figyelem: űres mező! / Warning: empty field! ");
 		else {
 			var disapp = document.getElementById(actlForm);
 			disapp.style.display = "none";

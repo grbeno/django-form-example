@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>This is the table of form data!</h1>
+<h1>Űrlap adatok táblázata</h1>
+<h3>Table of form data!</h3>
 <table id="res">
 <tr>
     <th>Project name</th>
@@ -30,7 +31,7 @@
 </tr>
 <tr>
     <td colspan=5></td>
-    <td><a class="mybutton" href="{% url 'next_data'%}">Next</a></td>
+    <td><a class="mybutton" href="{% url 'next_data'%}">New Data</a></td>
     <td><a class="mybutton" href="{% url 'clear_data'%}">New Project</a></td>
 </tr>
 </table>
