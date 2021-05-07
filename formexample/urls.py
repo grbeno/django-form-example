@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import HomePageView, Form1PageView, Form2PageView, ResultsPageView, getForm, getData, next_data, clear_data
+from .views import HomePageView, StainerpxPageView, Form1PageView, Form2PageView, ResultsPageView, getForm, getData, next_data, clear_data
 
 urlpatterns = [ path('', HomePageView.as_view(), name='home'),
+				path('stainerpx/', StainerpxPageView.as_view(), name='stainerpx'),
 				
 				path('form/', getForm, name='form'),
 				path('results/', getData, name='results'),

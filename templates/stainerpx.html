@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <script src="{% static 'js/stainerpx.js' %}"></script>
+</head>
+<h1>This is the StainerPx page!</h1>
+<h2>Image to preprocess:</h2>
+<img id="img" width="250" height="280" src="{% static 'images/stain.png'%}">
+{% endblock content %}
