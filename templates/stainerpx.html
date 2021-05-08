@@ -6,5 +6,15 @@
 </head>
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
-<img id="img" width="250" height="280" src="{% static 'images/stain.png'%}">
+<img id="img" width="" height="" src="{% static 'images/K_09.24.PNG'%}">
+<script>
+    var myImg = document.getElementById("img");
+    myImg.onmousedown = GetCoordinates;
+</script>
+<div id="pxinfo">
+<p> X: <span id="x"></span> Y: <span id="y"></span></p>
+</div>
+<div id="coords">
+<p><b>Coordinates:</b><br><br><span id="coordsArr"></span></p>
+</div>
 {% endblock content %}
