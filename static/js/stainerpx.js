@@ -1,5 +1,5 @@
 
-function InitPrepareImg(canvas,img) {
+/* function InitPrepareImg(canvas,img) {
   
   var ctx = canvas.getContext("2d");
   
@@ -9,7 +9,7 @@ function InitPrepareImg(canvas,img) {
   //img.width = 0;
   //img.height = 0; 
 
-}
+} */
 
 function FindPosition(image) {
   
