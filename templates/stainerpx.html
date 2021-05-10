@@ -11,7 +11,7 @@
 <script>
     var img = document.getElementById("img");
     var myCanvas = document.getElementById("CanvasImg");
-    InitPrepareImg(myCanvas,img);
+    img.onload = InitPrepareImg(myCanvas,img);
     myCanvas.onmousedown = GetCoordinates;
 </script>
 <div id="pxinfo">
