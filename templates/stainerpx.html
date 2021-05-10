@@ -5,27 +5,24 @@
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
 
-<img id="img" width="455" height="613" src="{% static 'images/K_09.24.PNG'%}" style="display: none;"> <!--style="display: none;"-->
-<canvas id="CanvasImg" width="455" height="613"></canvas> <!--style="border:1px solid #000000;"-->
+<img id="img" src="{% static 'images/K_09.24.PNG'%}" style="display: none;"> <!-- width="455" height="613" -->
+<canvas id="CanvasImg"></canvas> <!--style="border:1px solid #000000;"-->
 
 <script>
+    
     var img = document.getElementById("img");
     var myCanvas = document.getElementById("CanvasImg");
-    //InitPrepareImg(myCanvas,img);
-
-    img.onload = function () {
-  
-        var ctx = myCanvas.getContext("2d");
     
+    img.onload = function () {
+        var ctx = myCanvas.getContext("2d");
         myCanvas.width = img.width;
         myCanvas.height = img.height;  
         ctx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
-        //img.width = 0;
-        //img.height = 0; 
-
+        myCanvas.style.margin = "1% 0 0 1%";
     };
-
+    
     myCanvas.onmousedown = GetCoordinates;
+
 </script>
 <div id="pxinfo">
 <p> X: <span id="x"></span> Y: <span id="y"></span></p>

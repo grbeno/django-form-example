@@ -1,16 +1,4 @@
 
-/* function InitPrepareImg(canvas,img) {
-  
-  var ctx = canvas.getContext("2d");
-  
-  canvas.width = img.width;
-  canvas.height = img.height;  
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  //img.width = 0;
-  //img.height = 0; 
-
-} */
-
 function FindPosition(image) {
   
   if(typeof( image.offsetParent ) != "undefined") {
