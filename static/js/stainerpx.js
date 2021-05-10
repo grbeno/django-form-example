@@ -6,6 +6,8 @@ function InitPrepareImg(canvas,img) {
   canvas.width = img.width;
   canvas.height = img.height;  
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  img.width = 0;
+  img.height = 0; 
 
 }
 
@@ -35,9 +37,10 @@ function MarkPoints(canvas,posx,posy) {
 
 }
 
-var arr = []
+var arr = [];
+
 function GetCoordinates(e) {
-  
+
   var PosX = 0;
   var PosY = 0;
   var ImgPos;
@@ -81,6 +84,7 @@ function GetCoordinates(e) {
 
       //Marker points
       MarkPoints(myCanvas,PosX,PosY);
+      
     
     }
   }
