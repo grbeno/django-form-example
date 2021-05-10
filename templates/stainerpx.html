@@ -6,19 +6,16 @@
 </head>
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
-<img id="img" width="" height="" src="{% static 'images/K_09.24.PNG'%}">
+<img id="img" width="" height="" src="{% static 'images/K_09.24.PNG'%}" style="display: none;">
+<canvas id="CanvasImg" width="" height=""></canvas> <!--style="border:1px solid #000000;"-->
 <script>
-    var myImg = document.getElementById("img");
-    myImg.onmousedown = GetCoordinates;
+    var img = document.getElementById("img");
+    var myCanvas = document.getElementById("CanvasImg");
+    InitPrepareImg(myCanvas,img);
+    myCanvas.onmousedown = GetCoordinates;
 </script>
 <div id="pxinfo">
 <p> X: <span id="x"></span> Y: <span id="y"></span></p>
-
-<p>PosX0: <span id="PosX0"></span></p>
-<p>PosY0: <span id="PosY0"></span></p>
-<p>Img0: <span id="ImgPos[0]"></span></p>
-<p>Img1: <span id="ImgPos[1]"></span></p>
-
 </div>
 <div id="coords">
 <p><b>Coordinates:</b><br><br><span id="coordsArr"></span></p>

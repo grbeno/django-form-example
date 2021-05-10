@@ -1,4 +1,14 @@
 
+function InitPrepareImg(canvas,img) {
+  
+  var ctx = canvas.getContext("2d");
+  
+  canvas.width = img.width;
+  canvas.height = img.height;
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+}
+
 function FindPosition(image) {
   
   if(typeof( image.offsetParent ) != "undefined") {
@@ -13,25 +23,26 @@ function FindPosition(image) {
     }
 }
 
-/* function MarkPoints(image, posx, posy) {
-  var ctx = image.getContext("2d");
-  ctx.fillStyle = "red";
-  ctx.fillRect(posx, posy, 15, 15);
-} */
+function MarkPoints(canvas,posx,posy) {
+  
+  var ctx = canvas.getContext("2d");
+  var pointSize = 5; // Size of the point.
+  
+  ctx.fillStyle = "#33FF36"; // color
+  ctx.beginPath(); //Start path
+  ctx.arc(posx, posy, pointSize, 0, Math.PI * 2, true); // Draw a point
+  ctx.fill(); // Close path and fill.
+
+}
 
 var arr = []
-
 function GetCoordinates(e) {
   
-  //Teszt
-  var PosX0 = 0;
-  var PosY0 = 0;
-
   var PosX = 0;
   var PosY = 0;
   var ImgPos;
   
-  ImgPos = FindPosition(myImg);
+  ImgPos = FindPosition(myCanvas);
   
   if (!e) 
     var e = window.event;
@@ -45,27 +56,21 @@ function GetCoordinates(e) {
   if(rightClick) {
 
     if (e.pageX || e.pageY) {
-      PosX0 = e.pageX;
-      PosY0 = e.pageY;
+      PosX = e.pageX;
+      PosY = e.pageY;
     }
     else if (e.clientX || e.clientY) {
-        PosX0 = e.clientX + document.body.scrollLeft
+        PosX = e.clientX + document.body.scrollLeft
           + document.documentElement.scrollLeft;
-        PosY0 = e.clientY + document.body.scrollTop
+        PosY = e.clientY + document.body.scrollTop
           + document.documentElement.scrollTop;
     }
 
-    PosX = PosX0 - ImgPos[0];
-    PosY = PosY0 - ImgPos[1];
+    PosX = PosX - ImgPos[0];
+    PosY = PosY - ImgPos[1];
      
     if(PosX >= 0 && PosY >= 0 ) {
       
-      //Teszt
-      document.getElementById("PosX0").innerHTML = PosX0;
-      document.getElementById("PosY0").innerHTML = PosY0;
-      document.getElementById("ImgPos[0]").innerHTML = ImgPos[0];
-      document.getElementById("ImgPos[1]").innerHTML = ImgPos[1];
-
       //Poz
       document.getElementById("x").innerHTML = PosX;
       document.getElementById("y").innerHTML = PosY;
@@ -74,9 +79,9 @@ function GetCoordinates(e) {
       arr.push([PosX, PosY] + '<br>');
       document.getElementById("coordsArr").innerHTML = arr;
 
-     //MarkPoints(myImg,PosX,PosY);
-
-     //return [PosX, PosY];
+      //Marker points
+      MarkPoints(myCanvas,PosX,PosY);
+    
     }
   }
 }
