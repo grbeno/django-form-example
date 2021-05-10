@@ -4,8 +4,10 @@
 <script src="{% static 'js/stainerpx.js' %}"></script>
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
-<img id="img" width="" height="" src="{% static 'images/K_09.24.PNG'%}"> <!--style="display: none;"-->
-<canvas id="CanvasImg" width="" height=""></canvas> <!--style="border:1px solid #000000;"-->
+
+<img id="img" width="455" height="613" src="{% static 'images/K_09.24.PNG'%}" style="display: none;"> <!--style="display: none;"-->
+<canvas id="CanvasImg" width="455" height="613"></canvas> <!--style="border:1px solid #000000;"-->
+
 <script>
     var img = document.getElementById("img");
     var myCanvas = document.getElementById("CanvasImg");
