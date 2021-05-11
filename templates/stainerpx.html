@@ -12,6 +12,7 @@
     
     var img = document.getElementById("img");
     var myCanvas = document.getElementById("CanvasImg");
+    document.body.appendChild(myCanvas);
     
     img.onload = function () {
         var ctx = myCanvas.getContext("2d");
@@ -21,7 +22,7 @@
         myCanvas.style.margin = "1% 0 0 1%";
     };
     
-    myCanvas.onmousedown = GetCoordinates;
+    myCanvas.addEventListener("click", GetCoordinates);
 
 </script>
 <div id="pxinfo">
@@ -30,4 +31,7 @@
 <div id="coords">
 <p><b>Coordinates:</b><br><br><span id="coordsArr"></span></p>
 </div>
+<!--div id="test">
+<p><b>Coordinates:</b><br><br><span id="coordsArr"></span></p>
+</div-->
 {% endblock content %}

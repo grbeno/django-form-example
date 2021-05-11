@@ -13,19 +13,26 @@ function FindPosition(image) {
     }
 }
 
-function MarkPoints(canvas,posx,posy) {
+function MarkPoints() {
   
-  var ctx = canvas.getContext("2d");
+  var ctx = myCanvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
   var pointSize = 5; // Size of the point.
+  ctx.font = "12px Courier";
   
-  ctx.fillStyle = "#33FF36"; // color
-  ctx.beginPath(); //Start path
-  ctx.arc(posx, posy, pointSize, 0, Math.PI * 2, true); // Draw a point
-  ctx.fill(); // Close path and fill.
+  for (var a = 0; a < coords.length; a++) {
+    ctx.beginPath(); //Start path
+    ctx.arc(coords[a].PosX-5, coords[a].PosY-5, pointSize, 0, Math.PI * 2, true); // Draw a point
+    ctx.fillStyle = "#33FF36"; // text color
+    ctx.fillText( '(' + coords[a].PosX + ';' + coords[a].PosY + ')', coords[a].PosX, coords[a].PosY);
+    ctx.fillStyle = "red"; // point color
+    ctx.fill();
+    ctx.closePath();
+  }
 
 }
 
-var arr = [];
+var coords = [];
 
 function GetCoordinates(e) {
 
@@ -67,13 +74,40 @@ function GetCoordinates(e) {
       document.getElementById("y").innerHTML = PosY;
 
       //Coords Array
-      arr.push([PosX, PosY] + '<br>');
-      document.getElementById("coordsArr").innerHTML = arr;
+      coords.push([PosX, PosY]);
+      
+      div = document.getElementById("coordsArr");
+      var node = document.createElement("P");
+      div.appendChild(node);
+      node.innerHTML = coords[coords.length-1];
 
       //Marker points
-      MarkPoints(myCanvas,PosX,PosY);
+      //MarkPoints();
       
-    
+      node.addEventListener("click", function(e) {
+        
+        for (var a = 0; a < coords.length; a++) {
+          if (coords[a].node == e.target) {
+            coords.splice(a, 1);
+            break;
+          }
+        }
+        div.removeChild(e.target);
+        MarkPoints();
+        });
+        
+        //Teszt:
+        //div2 = document.getElementById("test");
+        //div2.innerHTML = coords;
+
+        coords.push({ // ???
+          PosX,
+          PosY,
+          node: node
+        });
+        
+        MarkPoints();
+
     }
   }
 }
