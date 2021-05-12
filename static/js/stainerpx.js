@@ -1,4 +1,3 @@
-
 function FindPosition(image) {
   
   if(typeof( image.offsetParent ) != "undefined") {
@@ -15,8 +14,8 @@ function FindPosition(image) {
 
 function MarkPoints() {
   
-  var ctx = myCanvas.getContext("2d");
-  ctx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, cw, ch);
   var pointSize = 5; // Size of the point.
   ctx.font = "12px Courier";
   
@@ -40,7 +39,7 @@ function GetCoordinates(e) {
   var PosY = 0;
   var ImgPos;
   
-  ImgPos = FindPosition(myCanvas);
+  ImgPos = FindPosition(canvas);
   
   if (!e) 
     var e = window.event;
