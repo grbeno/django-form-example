@@ -4,31 +4,29 @@
 <script src="{% static 'js/stpx_prep2.js' %}"></script> <!--stpx_prep1.js (remove points)  stpx_prep2.js (remove text/coords)-->
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
+<h3>Add points, click on image!<span style="color:blue;"> Last point: ( <span id="x"></span> ; <span id="y"></span> )</span></h3>
 
 <img id="img" src="{% static 'images/K_09.24.PNG'%}" style="display: none;"> <!-- width="455" height="613" -->
-<canvas id="canvas"></canvas> <!--style="border:1px solid #000000;"-->
+<canvas id="canvas" style="border:1px solid #000000;"></canvas>
 
 <script>
 
-    var img = document.getElementById("img");
-    var canvas = document.getElementById("canvas");
+    //var img = document.getElementById("img");
+    //var canvas = document.getElementById("canvas");
 
     img.onload = function() {
         canvas.width = img.width;
         canvas.height = img.height;
         MarkPoints();
     }
-    canvas.onmousedown = GetCoordinates;
-    //canvas.addEventListener("click", getPosition);
+
+    //canvas.onmousedown = GetCoordinates;
+    canvas.addEventListener("click", GetCoordinates);
     
 </script>
-<div id="pxinfo">
-<p> X: <span id="x"></span> Y: <span id="y"></span></p>
-</div>
 <div id="coords">
-<p><b>Coordinates:</b><br><br><span id="coordsArr"></span></p>
+<p><b>Coordinates:</b><br><br><span id="info" style="color:red;"></span><br><br><span id="coordsArr"></span></p>
 </div>
-<!--div id="test">
-<p><b>Coordinates:</b><br><br><span id="coordsArr"></span></p>
-</div-->
+<p id="test"></p>
+<!--button onclick="location.href =  '{% url 'coords' %}'"; >Next</button-->
 {% endblock content %}

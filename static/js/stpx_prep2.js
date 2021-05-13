@@ -1,6 +1,6 @@
 
 function FindPosition(image) {
-
+    
     if(typeof( image.offsetParent ) != "undefined") {
         for(var x = 0, y = 0; image; image = image.offsetParent) {
             x += image.offsetLeft;
@@ -10,7 +10,7 @@ function FindPosition(image) {
     }
         else {
             return [ image.x, image.y ];
-        }
+        } 
 }
 
 function MarkPoints() {
@@ -34,6 +34,7 @@ function MarkPoints() {
 }
 
 var coords = [];
+var dest = [];
 
 function GetCoordinates(e) {
 
@@ -44,17 +45,7 @@ function GetCoordinates(e) {
   
   if (!e) 
     var e = window.event;
-
-    // Only for rightclick!
-    if ("which" in e) { // Firefox, Safari/Chrome & Opera
-        leftClick = e.which == 1;
-        rightClick = e.which == 3;
-    } 
-    else if ("button" in e) {  // IE, Opera 
-        leftClick = e.button == 1;
-        rightClick = e.button == 3;
-    }
-      
+    
     if (e.pageX || e.pageY) {
         x = e.pageX;
         y = e.pageY;
@@ -67,49 +58,49 @@ function GetCoordinates(e) {
     x = x - ImgPos[0];
     y = y - ImgPos[1];
 
-    if (leftClick) {
-
-        if( x >= 0 && y >= 0 ) {
-            //Pos(x & y)
-            document.getElementById("x").innerHTML = x;
-            document.getElementById("y").innerHTML = y;
-            //Coords Array
-            coords.push([x, y]);
+    if( x >= 0 && y >= 0 ) {
+        
+        //Pos(x & y)
+        
+        document.getElementById("x").innerHTML = x;
+        document.getElementById("y").innerHTML = y;
+        
+        //Coords Array
+        
+        coords.push([x, y]);
+    }
+    
+    //Add coordinates as text
+    var div = document.getElementById("coordsArr");
+    var p = document.createElement("P");
+    div.appendChild(p);
+    p.innerHTML = coords[coords.length-1];
+    // Add info
+    var info = document.getElementById("info");
+    info.innerHTML = "<b>Info:</b> To delete a point please click to its coordinate below!";
+    // Test
+    //var test = document.getElementById("test");
+    //test.innerHTML = dest; // coords
+    
+    // Delete selected points
+    p.addEventListener("click", function(e) { // canvas..."dblclick" ???
+        for (var i = 0; i < coords.length; i++) {
+            if (coords[i].p == e.target) { // !
+                coords.splice(i, 1);
+                break;
+            }    
         }
-        
-        div = document.getElementById("coordsArr");
-        var node = document.createElement("P");
-        div.appendChild(node);
-        node.innerHTML = coords[coords.length-1];
-        
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        
-        node.addEventListener("click", function(e) { // canvas..."dblclick" ???
-            for (var i = 0; i < coords.length; i++) {
-                if (coords[i].node == e.target) { // !
-                //MarkPoints();
-                //ctx.beginPath(); //Start path
-                //ctx.arc(coords[i].x, coords[i].y, 5, 0, Math.PI * 2, true); // Draw a point
-                //if (ctx.isPointInPath(x, y)) {
-                    coords.splice(i, 1);
-                    break;
-                }    
-            }
-            //ctx.clearRect(0, 0, canvas.width, canvas.height);
-            div.removeChild(e.target); // !
-            MarkPoints();
-        });
-        
-        coords.push({ // ???
-            x,
-            y,
-            node: node
-        });
-        
-        MarkPoints(); 
+        div.removeChild(e.target); // !
+        MarkPoints();
+    });
+     
+    coords.push({ // ???
+        x: x,
+        y: y,
+        p: p
+    });
 
-    } //leftClick
-
+    MarkPoints();
+    
 } // function
 

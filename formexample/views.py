@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .forms import DemoForm_1, DemoForm_2, DemoForm_3
 from .models import Projectname, Modelform1, Modelform2
-import io
+#from .stainerpx import *
 
 " Some template views "
 
@@ -16,6 +16,9 @@ class HomePageView(TemplateView):
 
 class StainerpxPageView(TemplateView):
 	template_name = 'stainerpx.html'
+
+class CoordsPageView(TemplateView):
+	template_name = 'coords.html'
 
 # Form_1
 
@@ -69,45 +72,30 @@ def getData(request):
 		context['group'] = zip(project,param1,param2)
 		
 		#print(list(param1.values('ph','thk','ka','humusz'))) # list of dictionaries
-
-		## fig
-
-		""" def getCoord():
-        " show image, call __onclick(), return coordinates " 
-		points = []
-		img = cv2.imread('images\K_09.24.PNG')
-		fig = plt.figure()
-		#plt.imshow(img)
-        cid = fig.canvas.mpl_connect('button_press_event', onclick)
-        
-		buf = io.BytesIO()
-		fig.savefig(buf, format='png')
-		buf.seek(0)
-		string = base64.b64encode(buf.read())
-		uri = 'data:image/png;base64,' + urllib.parse.quote(string)
-		args = {'image':uri}
 		
-		#plt.show()
-        return points
-
-    	def onclick(event):
-        " onclick event -> draw the points, add pixel's x,y coordinates to list "
-        points.append((event.xdata,event.ydata))
-        plt.plot(event.xdata, event.ydata, '.', color='red', markersize=16)
-        fig.canvas.draw() """
-
-		### request <- context
-
-
 	else:
-		
+
 		form1 = DemoForm_1()
 		form2 = DemoForm_2()
 		form3 = DemoForm_3()
 		
 		return redirect('/form/')
-	print(context['group'])
+	
 	return render(request,'results.html',context)
+
+""" 
+def getImage(request):
+	" ... "
+	return render(request,'results.html',context)
+"""
+
+""" def getCoords(request):
+	if request.method == 'POST':
+		coords = request.POST.get('coords')
+		context = {'coords': coords}
+	
+	return render(request,'coords.html',context) """
+
 
 def clear_data(request):
 	Projectname.objects.all().delete()
