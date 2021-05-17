@@ -21,11 +21,11 @@ function MarkPoints() {
   var pointSize = 5; // Size of the point.
   ctx.font = "12px Courier";
   
-  for (var i = 0; i < coords.length; i++) {
+  for (var i = 0; i < points.length; i++) {
     ctx.beginPath(); //Start path
-    ctx.arc(coords[i].x, coords[i].y, pointSize, 0, Math.PI * 2, true); // Draw a point
+    ctx.arc(points[i].x, points[i].y, pointSize, 0, Math.PI * 2, true); // Draw a point
     ctx.fillStyle = "#33FF36"; // text color
-    ctx.fillText( '(' + coords[i].x + ';' + coords[i].y + ')', coords[i].x+5, coords[i].y+5);
+    ctx.fillText( '(' + points[i].x + ';' + points[i].y + ')', points[i].x+5, points[i].y+5);
     ctx.fillStyle = "red"; // point color
     ctx.fill();
     ctx.closePath();
@@ -34,7 +34,7 @@ function MarkPoints() {
 }
 
 var coords = [];
-var dest = [];
+var points = [];
 
 function GetCoordinates(e) {
 
@@ -67,6 +67,7 @@ function GetCoordinates(e) {
         
         //Coords Array
         
+        //points.push([x, y]);
         coords.push([x, y]);
     }
     
@@ -78,23 +79,24 @@ function GetCoordinates(e) {
     // Add info
     var info = document.getElementById("info");
     info.innerHTML = "<b>Info:</b> To delete a point please click to its coordinate below!";
-    // Test
-    //var test = document.getElementById("test");
-    //test.innerHTML = dest; // coords
     
     // Delete selected points
     p.addEventListener("click", function(e) { // canvas..."dblclick" ???
-        for (var i = 0; i < coords.length; i++) {
-            if (coords[i].p == e.target) { // !
+        for (var i = 0; i < points.length; i++) {
+            if (points[i].p == e.target) { // !
                 coords.splice(i, 1);
+                points.splice(i, 1);
                 break;
             }    
         }
+        
         div.removeChild(e.target); // !
         MarkPoints();
     });
+
+    //console.log(coords);
      
-    coords.push({ // ???
+    points.push({ // ???
         x: x,
         y: y,
         p: p
@@ -102,5 +104,12 @@ function GetCoordinates(e) {
 
     MarkPoints();
     
+    //var dest = JSON.stringify(coords);
+   
+    //var c = document.getElementById("cc");
+    //c.innerHTML = coords; 
+    
+    
+
 } // function
 

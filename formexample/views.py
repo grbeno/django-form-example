@@ -4,6 +4,8 @@ from django.views.generic import TemplateView
 from .forms import DemoForm_1, DemoForm_2, DemoForm_3
 from .models import Projectname, Modelform1, Modelform2
 #from .stainerpx import *
+#from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 
 " Some template views "
 
@@ -34,7 +36,6 @@ class Form2PageView(TemplateView):
 
 class ResultsPageView(TemplateView):
 	template_name = 'results.html'
-
 
 # Forms
 
@@ -89,12 +90,22 @@ def getImage(request):
 	return render(request,'results.html',context)
 """
 
-""" def getCoords(request):
-	if request.method == 'POST':
-		coords = request.POST.get('coords')
-		context = {'coords': coords}
+#@csrf_exempt # ???
+@csrf_protect
+def getCoords(request):
 	
-	return render(request,'coords.html',context) """
+	context = {}
+	print("WRONG!")
+	
+	if request.method == 'POST':  # and request.is_ajax():
+		coords = request.POST.get('coords[]')
+		#context = {'coords', coords}
+		print("TRUE!")
+		print(coords)
+	else:
+		print("WRONG!")
+	
+	return render(request, 'coords.html')  #, context)
 
 
 def clear_data(request):

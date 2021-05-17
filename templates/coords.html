@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<script>
+    //any script ...
+</script>
 <h1>This is the coords!</h1>
+<p>{{ coords }}</p>
+{% for c in coords %}
+<p>{{ c }}</p>
+{% endfor %}  
 {% endblock content %}
