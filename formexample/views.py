@@ -1,11 +1,12 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .forms import DemoForm_1, DemoForm_2, DemoForm_3
 from .models import Projectname, Modelform1, Modelform2
 #from .stainerpx import *
+from django.template.loader import render_to_string
 #from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.csrf import csrf_protect
+from django.http import JsonResponse
 
 " Some template views "
 
@@ -72,7 +73,7 @@ def getData(request):
 		
 		context['group'] = zip(project,param1,param2)
 		
-		#print(list(param1.values('ph','thk','ka','humusz'))) # list of dictionaries
+		print(list(param1.values('ph','thk','ka','humusz'))) # list of dictionaries
 		
 	else:
 
@@ -90,22 +91,18 @@ def getImage(request):
 	return render(request,'results.html',context)
 """
 
-#@csrf_exempt # ???
-@csrf_protect
+#@csrf_exempt
 def getCoords(request):
 	
-	context = {}
-	print("WRONG!")
+	context = {'coords' : ['000', 'üres', ':(']}
 	
-	if request.method == 'POST':  # and request.is_ajax():
-		coords = request.POST.get('coords[]')
-		#context = {'coords', coords}
-		print("TRUE!")
-		print(coords)
-	else:
-		print("WRONG!")
-	
-	return render(request, 'coords.html')  #, context)
+	if request.method == 'POST':  #if request.is_ajax():
+		coords = request.POST.getlist('coords[]')
+		context = {'coords' : coords}
+		print(context)  # context
+		#return JsonResponse(context)
+	return render(request, 'coords.html', context)
+	#return HttpResponse('')
 
 
 def clear_data(request):

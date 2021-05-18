@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <script src="{% static 'js/stpx_prep2.js' %}"></script> <!--stpx_prep1.js (remove points)  stpx_prep2.js (remove text/coords)-->
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <p><span id="cc"></span></p>
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
@@ -11,7 +11,11 @@
 <img id="img" src="{% static 'images/K_09.24.PNG'%}" style="display: none;"> <!-- width="455" height="613" -->
 <canvas id="canvas" style="border:1px solid #000000;"></canvas>
 
+{% block javascript %}
 <script>
+
+    //var img = document.getElementById("img");
+    //var canvas = document.getElementById("canvas");
 
     img.onload = function() {
         canvas.width = img.width;
@@ -21,34 +25,40 @@
     canvas.addEventListener("click", GetCoordinates);
     console.log(coords);
 
-</script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    
     $(document).ready(function() {
         $("#next").click(function() {
-       
-            alert(coords);
-            
             $.ajax({
-                url: "http://localhost:8000/coords/", //"{% url 'coords' %}",
+                url: "{% url 'coords' %}",
                 type: 'POST',
-                data: coords, //{'coords': coords},
-                processData: false,
-                contentType: false
+                data: {'coords[]': coords, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+                //dataType: "json",
+                success: function(response){
+                    alert("success: " + coords);
+                    window.location.href = "{% url 'coords' %}";
+                    //return false;
+                },
+                error: function(response){
+                    alert("error");
+                }
+            /* }).done(function (data) {
+                if (data.success) {
+                    window.location.href = "{% url 'coords' %}";
+                    return false;
+                }  */      
             });
-
-         });
+            
+        });
+         
     });
 
 </script>
-
-<a href="{% url 'coords' %}" id="next">NEXT</a>
-<!--button>NEXT</button-->
+{% endblock javascript %}
+<!--a href="{% url 'coords' %}" id="next">NEXT</a-->
+<button id="next">NEXT</button>
 <div id="coords">
 <p><b>Coordinates:</b><br><br><span id="info" style="color:red;"></span><br><br><span id="coordsArr"></span></p>
 </div>
 <p id="test"></p>
 <!--button onclick="location.href =  '{% url 'coords' %}'"; >Next</button-->
+
 {% endblock content %}
