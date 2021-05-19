@@ -6,7 +6,8 @@ from .models import Projectname, Modelform1, Modelform2
 #from .stainerpx import *
 from django.template.loader import render_to_string
 #from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+#from django.http import JsonResponse
+#from django.views.decorators.http import require_POST
 
 " Some template views "
 
@@ -92,17 +93,30 @@ def getImage(request):
 """
 
 #@csrf_exempt
-def getCoords(request):
+#@require_POST
+def passCoords(request):
 	
-	context = {'coords' : ['000', 'üres', ':(']}
+	MINIMUM_POINTS = 3
+	context = {}
 	
 	if request.method == 'POST':  #if request.is_ajax():
 		coords = request.POST.getlist('coords[]')
-		context = {'coords' : coords}
-		print(context)  # context
-		#return JsonResponse(context)
+		if len(coords) >= MINIMUM_POINTS:
+			context = {'coords' : coords}
+			" Function that need context here !!! "
+			#retData(context)
+		
+		print(f'{context} -> contains  {len(coords)} values') # info on CL
+	
+	else:
+		return HttpResponse(' Empty context! Still not works :( ') # GET request
+		#return redirect('/stainerpx/')  # if it works!
+	
 	return render(request, 'coords.html', context)
-	#return HttpResponse('')
+	
+	
+# def retData(data):
+# 	return data
 
 
 def clear_data(request):

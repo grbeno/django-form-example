@@ -30,29 +30,36 @@
             $.ajax({
                 url: "{% url 'coords' %}",
                 type: 'POST',
-                data: {'coords[]': coords, 'csrfmiddlewaretoken': '{{ csrf_token }}' },
-                //dataType: "json",
+                data: {'coords[]': coords, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
                 success: function(response){
-                    alert("success: " + coords);
-                    window.location.href = "{% url 'coords' %}";
-                    //return false;
+                    if (coords.length > 2) {
+                        alert("success: " + coords);
+                        window.location.href = "{% url 'coords' %}";
+                    }
+                    else {
+                        alert("You need pick at least 3 points from the image!");
+                    }  
                 },
                 error: function(response){
                     alert("error");
-                }
-            /* }).done(function (data) {
-                if (data.success) {
-                    window.location.href = "{% url 'coords' %}";
-                    return false;
-                }  */      
+                }   
             });
-            
         });
-         
     });
-
+    
+    //document.getElementById("textC").value = coords; //setAttribute('value', coords);
+    
 </script>
 {% endblock javascript %}
+<!--form action = '/coords/' method = "POST">
+	{% csrf_token %}
+    <table>
+    <th>
+	    <tr><input type="text" name="coords" id="textC" style="display: none;"></tr>
+        <tr><input type="submit" name="submit" id="next" value="Tovább / Next"></tr>
+    </th>
+</table>
+</form-->
 <!--a href="{% url 'coords' %}" id="next">NEXT</a-->
 <button id="next">NEXT</button>
 <div id="coords">
@@ -60,5 +67,4 @@
 </div>
 <p id="test"></p>
 <!--button onclick="location.href =  '{% url 'coords' %}'"; >Next</button-->
-
 {% endblock content %}
