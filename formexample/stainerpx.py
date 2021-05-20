@@ -6,7 +6,7 @@ def mkmask(coords,path):
     
     " Masking image by polygon pixel coordinates " 
     
-    img = cv2.imread(f'{path}\\K_09.24.PNG')
+    img = cv2.imread(f'{path}K_09.24.PNG')
     
     coords = [ tuple(map(int, i.split(','))) for i in coords['coords'] ]
     pts = np.array(coords, np.dtype('int'))
@@ -28,7 +28,7 @@ def mkmask(coords,path):
     bg = np.ones_like(croped, np.uint8)*255
     cv2.bitwise_not(bg,bg, mask=mask)
     res = bg + dst
-    masked = f'{path}\\dst.png'
+    masked = f'{path}dst.png'
     cv2.imwrite(masked,res)
 
 
