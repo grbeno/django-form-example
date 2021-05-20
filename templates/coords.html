@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <h1>This is the masked image!</h1>
-<img id="img" src="{% static 'images/dst.png'%}"> 
+<h2>Image to analyse:</h2>
+<h3>Select filters, to scaling the analysing!</h3>
+
+<img id="img" src="{% static 'images/dst.png'%}" style="display: none;">
+<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+
+{% block javascript %}
+<script>
+    
+    var img = document.getElementById("img");
+    var canvas = document.getElementById("canvas");
+
+    img.onload = function() {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    }
+
+</script>
+{% endblock javascript %}
+
+<!--This is not working!-->
 
 <p>{{ coords }}</p>
 {% for coords in coords %}

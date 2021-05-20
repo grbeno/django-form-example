@@ -102,14 +102,7 @@ function GetCoordinates(e) {
         p: p
     });
 
-    MarkPoints();
-    
-    //var dest = JSON.stringify(coords);
-   
-    //var c = document.getElementById("cc");
-    //c.innerHTML = coords; 
-    
-    
+    MarkPoints();    
 
 } // function
 

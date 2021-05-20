@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<script src="{% static 'js/stpx_prep2.js' %}"></script> <!--stpx_prep1.js (remove points)  stpx_prep2.js (remove text/coords)-->
+
+<script src="{% static 'js/stpx_prep2.js' %}"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<p><span id="cc"></span></p>
+
 <h1>This is the StainerPx page!</h1>
 <h2>Image to preprocess:</h2>
 <h3>Add points, click on image!<span style="color:blue;"> Last point: ( <span id="x"></span> ; <span id="y"></span> )</span></h3>
@@ -46,25 +47,14 @@
             });
         });
     });
-    
-    //document.getElementById("textC").value = coords; //setAttribute('value', coords);
-    
+     
 </script>
 {% endblock javascript %}
-<!--form action = '/coords/' method = "POST">
-	{% csrf_token %}
-    <table>
-    <th>
-	    <tr><input type="text" name="coords" id="textC" style="display: none;"></tr>
-        <tr><input type="submit" name="submit" id="next" value="Tovább / Next"></tr>
-    </th>
-</table>
-</form-->
+
 <!--a href="{% url 'coords' %}" id="next">NEXT</a-->
 <button id="next">NEXT</button>
 <div id="coords">
 <p><b>Coordinates:</b><br><br><span id="info" style="color:red;"></span><br><br><span id="coordsArr"></span></p>
 </div>
-<p id="test"></p>
-<!--button onclick="location.href =  '{% url 'coords' %}'"; >Next</button-->
+
 {% endblock content %}

@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 #from django.http import JsonResponse
 #from django.views.decorators.http import require_POST
 
-from .stainerpx import mask
+from .stainerpx import mkmask
 
 " Some template views "
 
@@ -106,7 +106,7 @@ def passCoords(request):
 		if len(coords) >= MINIMUM_POINTS:
 			context = {'coords' : coords}
 			" Mask image "
-			mask(context)	
+			mkmask(context,'static\\images')
 	#else:
 		#return HttpResponse(' Empty context! Still not works :( ') # GET request
 		#return redirect('/stainerpx/')  # if it works!

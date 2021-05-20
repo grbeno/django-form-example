@@ -2,10 +2,11 @@ import cv2
 import numpy as np
 
 
-def mask(coords):
-    " ... " 
-    path = "c:\\Python\\Python38-32\\Django\\form_example\\static\\images\\"
-    img = cv2.imread(f'{path}K_09.24.PNG')  # images\\K_09.24.PNG
+def mkmask(coords,path):
+    
+    " Masking image by polygon pixel coordinates " 
+    
+    img = cv2.imread(f'{path}\\K_09.24.PNG')
     
     coords = [ tuple(map(int, i.split(','))) for i in coords['coords'] ]
     pts = np.array(coords, np.dtype('int'))
@@ -27,7 +28,7 @@ def mask(coords):
     bg = np.ones_like(croped, np.uint8)*255
     cv2.bitwise_not(bg,bg, mask=mask)
     res = bg + dst
-    masked = f'{path}dst.png' # images\\dst2.png 
+    masked = f'{path}\\dst.png'
     cv2.imwrite(masked,res)
 
 
@@ -35,4 +36,4 @@ def mask(coords):
 
 #coords = { 'coords': ['132,34', '147,87', '206,86', '217,139', '171,149', '187,210', '116,232', '182,575', '436,497', '281,79'] }
 #folder = "c:\\Python\\Python38-32\\Django\\form_example\\static\\images"
-#masked_image = mask(coords,folder)
+#masked_image = mkmask(coords,folder)
