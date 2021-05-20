@@ -106,7 +106,7 @@ def passCoords(request):
 		if len(coords) >= MINIMUM_POINTS:
 			context = {'coords' : coords}
 			" Mask image "
-			mkmask(context,'static\\images')
+			mkmask(context,'images')
 	#else:
 		#return HttpResponse(' Empty context! Still not works :( ') # GET request
 		#return redirect('/stainerpx/')  # if it works!
