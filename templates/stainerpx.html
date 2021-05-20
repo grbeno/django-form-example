@@ -34,7 +34,7 @@
                 data: {'coords[]': coords, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
                 success: function(response){
                     if (coords.length > 2) {
-                        alert("success: " + coords);
+                        alert("Success!\nPoints: " + coords);
                         window.location.href = "{% url 'coords' %}";
                     }
                     else {
@@ -52,9 +52,10 @@
 {% endblock javascript %}
 
 <!--a href="{% url 'coords' %}" id="next">NEXT</a-->
-<button id="next">NEXT</button>
+
 <div id="coords">
-<p><b>Coordinates:</b><br><br><span id="info" style="color:red;"></span><br><br><span id="coordsArr"></span></p>
+    <button id="next">SEND DATA</button>
+    <p><b>Coordinates:</b><br><br><span id="info" style="color:red;"></span><br><br><span id="coordsArr"></span></p>
 </div>
 
 {% endblock content %}
