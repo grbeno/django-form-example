@@ -3,11 +3,13 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .forms import DemoForm_1, DemoForm_2, DemoForm_3
 from .models import Projectname, Modelform1, Modelform2
-#from .stainerpx import *
 from django.template.loader import render_to_string
+
 #from django.views.decorators.csrf import csrf_exempt
 #from django.http import JsonResponse
 #from django.views.decorators.http import require_POST
+
+from .stainerpx import mask
 
 " Some template views "
 
@@ -103,20 +105,13 @@ def passCoords(request):
 		coords = request.POST.getlist('coords[]')
 		if len(coords) >= MINIMUM_POINTS:
 			context = {'coords' : coords}
-			" Function that need context here !!! "
-			#retData(context)
-		
-		print(f'{context} -> contains  {len(coords)} values') # info on CL
-	
-	else:
-		return HttpResponse(' Empty context! Still not works :( ') # GET request
+			" Mask image "
+			mask(context)	
+	#else:
+		#return HttpResponse(' Empty context! Still not works :( ') # GET request
 		#return redirect('/stainerpx/')  # if it works!
 	
 	return render(request, 'coords.html', context)
-	
-	
-# def retData(data):
-# 	return data
 
 
 def clear_data(request):

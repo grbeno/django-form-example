@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h1>This is the coords!</h1>
+<h1>This is the masked image!</h1>
+<img id="img" src="{% static 'images/dst.png'%}"> 
+
 <p>{{ coords }}</p>
 {% for coords in coords %}
 <p>{{ coords }}</p>
 {% endfor %}  
+
 {% endblock content %}
