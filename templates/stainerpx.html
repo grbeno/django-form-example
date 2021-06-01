@@ -10,7 +10,20 @@
 <h3>Add points, click on image!<span style="color:blue;"> Last point: ( <span id="x"></span> ; <span id="y"></span> )</span></h3>
 
 <img id="img" src="{% static 'images/K_09.24.PNG'%}" style="display: none;"> <!-- width="455" height="613" -->
-<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+<canvas id="canvas" style="border:1px solid #000000;display:inline;"></canvas>
+
+<div id = "st_degree">
+    
+    <p>Please select stain degree:</p>
+        
+        <input type="radio" id="first" name="stain_degree" value='6'>
+        <label for="first">6</label><br>
+        <input type="radio" id="second" name="stain_degree" value='10'>
+        <label for="second">10</label><br>
+        <input type="radio" id="third" name="stain_degree" value='16'>
+        <label for="third">16</label>
+    
+</div>
 
 {% block javascript %}
 <script>
@@ -23,12 +36,15 @@
     canvas.addEventListener("click", GetCoordinates);
     console.log(coords);
 
+    //var colors = document.querySelector('input[name="stain_degree"]:checked').value; // nem működik !
+    var colors = 16;
+    
     $(document).ready(function() {
         $("#next").click(function() {
             $.ajax({
                 url: "{% url 'coords' %}",
                 type: 'POST',
-                data: {'coords[]': coords, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                data: {'coords[]': coords, 'colors': colors, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
                 success: function(response){
                     if (coords.length > 2) {
                         alert("Success!\nPoints: " + coords);
@@ -44,7 +60,7 @@
             });
         });
     });
-     
+    
 </script>
 {% endblock javascript %}
 

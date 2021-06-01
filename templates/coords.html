@@ -2,12 +2,13 @@
 {% load static %}
 {% block content %}
 
-<h1>This is the masked image!</h1>
-<h2>Image to analyse:</h2>
-<h3>Select filters to scaling the analysis!<span style="color:blue;"> It is not works yet!</span></h3>
+<h1>Test images!</h1>
+<h2>Masked image to analyse:</h2>
 
-<img id="img" src="{% static 'images/dst.png'%}" style="display: none;">
+
+<img id="img" src="{% static 'images/prepared.png'%}" style="display: none;">
 <canvas id="canvas" style="border:1px solid #000000;"></canvas>
+<img id="img" src="{% static 'images/stain.png'%}">
 
 {% block javascript %}
 <script>
@@ -28,8 +29,8 @@
 <!--This is not working!-->
 
 <p>{{ coords }}</p>
-{% for coords in coords %}
-<p>{{ coords }}</p>
+{% for c in coords %}
+<p>{{ c }}</p>
 {% endfor %}  
 
 {% endblock content %}

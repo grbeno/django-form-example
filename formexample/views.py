@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 #from django.http import JsonResponse
 #from django.views.decorators.http import require_POST
 
-from .stainerpx import mkmask
+from .stainerpx import mkmask, stainer
 
 " Some template views "
 
@@ -100,13 +100,23 @@ def passCoords(request):
 	
 	MINIMUM_POINTS = 3
 	context = {}
+	colors = 0
+	img_path = 'static//images//' 
+	st_data = []
 	
 	if request.method == 'POST':  #if request.is_ajax():
 		coords = request.POST.getlist('coords[]')
+		colors = int(request.POST.get('colors'))
 		if len(coords) >= MINIMUM_POINTS:
-			context = {'coords' : coords}
+			context = {'coords' : coords, 'colors': colors}
 			" Mask image "
-			mkmask(context,'static//images//')
+			mkmask(context['coords'],img_path)
+			" Stainer "
+			st_data = stainer(context['colors'],img_path)
+			print(st_data)
+			#context = {'st_data' : st_data}
+			" Context save to file / to Model ???"
+			
 	#else:
 		#return HttpResponse(' Empty context! Still not works :( ') # GET request
 		#return redirect('/stainerpx/')  # if it works!
