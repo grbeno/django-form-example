@@ -26,11 +26,12 @@
 </script>
 {% endblock javascript %}
 
-<!--This is not working!-->
-
-<p>{{ coords }}</p>
-{% for c in coords %}
-<p>{{ c }}</p>
+<h3>Data:</h3>
+{% for q in st_query %}
+<p>Coords:</p>
+<p>{{ q.coords }}</p>
+<p>Colors_%:</p>
+<p>{{ q.st_colors }}</p>
 {% endfor %}  
 
 {% endblock content %}

@@ -21,3 +21,10 @@ class Modelform2(models.Model):
 
 	def __str__(self):
 		return '%s %s' % (self.p2o5, self.k2o)
+
+class StainerModel(models.Model):
+	coords = models.CharField(max_length=100)
+	st_colors = models.CharField(max_length=100)
+	
+	def __str__(self):
+		return '%s %s' % (self.coords, self.st_colors)

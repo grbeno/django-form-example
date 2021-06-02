@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .forms import DemoForm_1, DemoForm_2, DemoForm_3
-from .models import Projectname, Modelform1, Modelform2
+from .models import Projectname, Modelform1, Modelform2, StainerModel
 from django.template.loader import render_to_string
 
 #from django.views.decorators.csrf import csrf_exempt
@@ -100,26 +100,33 @@ def passCoords(request):
 	
 	MINIMUM_POINTS = 3
 	context = {}
-	colors = 0
 	img_path = 'static//images//' 
 	st_data = []
 	
 	if request.method == 'POST':  #if request.is_ajax():
+		
 		coords = request.POST.getlist('coords[]')
 		colors = int(request.POST.get('colors'))
+		
 		if len(coords) >= MINIMUM_POINTS:
-			context = {'coords' : coords, 'colors': colors}
-			" Mask image "
-			mkmask(context['coords'],img_path)
-			" Stainer "
-			st_data = stainer(context['colors'],img_path)
-			print(st_data)
-			#context = {'st_data' : st_data}
-			" Context save to file / to Model ???"
 			
+			" Mask image "
+			mkmask(coords,img_path)
+			
+			" Stainer "
+			st_data = stainer(colors,img_path)
+			st_data = [i for i in st_data[1:] if i > 0] # except 0th element (background) & 0 values ! 
+			
+			" Context to Model "
+			StainerModel.objects.all().delete()
+			StainerModel.objects.create(coords=coords,st_colors=st_data)
+				
 	#else:
 		#return HttpResponse(' Empty context! Still not works :( ') # GET request
 		#return redirect('/stainerpx/')  # if it works!
+	
+	st_query = StainerModel.objects.all()
+	context = {'st_query': st_query}
 	
 	return render(request, 'coords.html', context)
 
