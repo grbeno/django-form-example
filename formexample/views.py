@@ -118,8 +118,7 @@ def passCoords(request):
 			st_data = [i for i in st_data[1:] if i > 0] # except 0th element (background) & 0 values ! 
 			
 			" Context to Model "
-			if StainerModel.objects.count() > 0:
-				StainerModel.objects.all().delete()
+			StainerModel.objects.all().delete()
 			StainerModel.objects.create(coords=coords,st_colors=st_data)
 				
 	#else:
