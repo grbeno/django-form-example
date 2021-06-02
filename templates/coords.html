@@ -5,15 +5,15 @@
 <h1>Test images!</h1>
 <h2>Masked image to analyse:</h2>
 
-
-<img id="img" src="{% static 'images/prepared.png'%}" style="display: none;">
-<canvas id="canvas" style="border:1px solid #000000;"></canvas>
-<img id="img" src="{% static 'images/stain.png'%}">
+<img id="img1" src="{% static 'images/prepared.png'%}" style="display: none;">
+<canvas id="canvas" style="border:1px solid #000000;margin-right:1%;"></canvas>
+<img id="img2" src="{% static 'images/stain.png'%}">
+<!--canvas id="canvas" style="border:1px solid #000000;"></canvas-->
 
 {% block javascript %}
 <script>
     
-    var img = document.getElementById("img");
+    var img = document.getElementById("img1");
     var canvas = document.getElementById("canvas");
 
     img.onload = function() {

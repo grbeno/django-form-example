@@ -16,11 +16,13 @@
     
     <p>Please select stain degree:</p>
         
+        <input type="radio" id="zero" name="stain_degree" value='2'>
+        <label for="first">2</label><br>
         <input type="radio" id="first" name="stain_degree" value='6'>
         <label for="first">6</label><br>
         <input type="radio" id="second" name="stain_degree" value='10'>
         <label for="second">10</label><br>
-        <input type="radio" id="third" name="stain_degree" value='16'>
+        <input type="radio" id="third" name="stain_degree" value='16' checked>
         <label for="third">16</label>
     
 </div>
@@ -35,12 +37,10 @@
     }
     canvas.addEventListener("click", GetCoordinates);
     console.log(coords);
-
-    //var colors = document.querySelector('input[name="stain_degree"]:checked').value; // nem működik !
-    var colors = 16;
     
     $(document).ready(function() {
         $("#next").click(function() {
+            var colors = $("input[type=radio][name=stain_degree]:checked").val();
             $.ajax({
                 url: "{% url 'coords' %}",
                 type: 'POST',
