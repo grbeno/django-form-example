@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 import math
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 
 " MASKING IMAGE "
@@ -80,12 +83,14 @@ def stainer(colors,path):
     st_colors.insert(0,(255,255,255)) # background
     
     st_data = [0 for x in range(len(st_colors))]
-    
+    colors = []
     for i in range(width):
         for j in range(height):
             for(index,start,end) in st_color_ints:
                 if start <= gray[i,j] and gray[i,j] <= end:
-                    new[i,j]= st_colors[index]    
+                    new[i,j]= st_colors[index]
+                    if st_colors[index] not in colors and index > 0: # no duplicate, no background!
+                        colors.append(st_colors[index])
                     count=st_data[index]
                     st_data[index]=count+1
                     break
@@ -93,9 +98,18 @@ def stainer(colors,path):
     new = cv2.cvtColor(new, cv2.COLOR_BGR2RGB)
     cv2.imwrite(f'{path}stain.png', new)
     
-    st_data = [float(format(data/(size-st_data[0])*100,'.2f')) for data in st_data]
+    new_data = [ i for i in st_data[1:] if i > 0 ] # no 0 values, no background!
+    percent = [ float(format(data/(size-st_data[0])*100,'.2f')) for data in new_data ] #if data/(size-st_data[0])*100 > 1 ] # no 0-1 %-s
     
-    return st_data
+    " PIE diagram " # on Heroku ???
+
+    colors = [ tuple([i/255 for i in rgb]) for rgb in colors ]
+    
+    plt.clf()
+    plt.pie(new_data,colors=colors,labels=percent)
+    plt.savefig(f'{path}pie_st.png')
+    
+    return percent
 
 
 " CLUSTERING METHOD "

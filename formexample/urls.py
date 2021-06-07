@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomePageView, StainerpxPageView, CoordsPageView, Form1PageView, Form2PageView, ResultsPageView, getForm, getData, next_data, clear_data, passCoords #getCoords
+from .views import HomePageView, StainerpxPageView, CoordsPageView, Form1PageView, Form2PageView, ResultsPageView, getForm, getData, next_data, clear_data, passCoords ,delete_coords
 
 urlpatterns = [ path('', HomePageView.as_view(), name='home'),
 				
@@ -7,6 +7,8 @@ urlpatterns = [ path('', HomePageView.as_view(), name='home'),
 				path('results/', getData, name='results'),
 				
 				path('coords/', passCoords, name='coords'), #getCoords
+				path('delete_coords', delete_coords, name='delete_coords'),
+				
 				path('next_data', next_data, name='next_data'),
 				path('clear_data', clear_data, name='clear_data'),
 				

@@ -8,7 +8,7 @@ from django.template.loader import render_to_string
 #from django.views.decorators.csrf import csrf_exempt
 #from django.http import JsonResponse
 #from django.views.decorators.http import require_POST
-
+import os
 from .stainerpx import mkmask, stainer
 
 " Some template views "
@@ -103,8 +103,8 @@ def passCoords(request):
 	img_path = 'static//images//' 
 	st_data = []
 	
-	if request.method == 'POST':  #if request.is_ajax():
-		
+	if request.method == 'POST': # request.is_ajax() and 
+				
 		coords = request.POST.getlist('coords[]')
 		colors = int(request.POST.get('colors'))
 		
@@ -115,21 +115,33 @@ def passCoords(request):
 			
 			" Stainer "
 			st_data = stainer(colors,img_path)
-			st_data = [i for i in st_data[1:] if i > 0] # except 0th element (background) & 0 values ! 
 			
 			" Context to Model "
 			StainerModel.objects.all().delete()
 			StainerModel.objects.create(coords=coords,st_colors=st_data)
-				
+
 	#else:
-		#return HttpResponse(' Empty context! Still not works :( ') # GET request
-		#return redirect('/stainerpx/')  # if it works!
-	
+		#return HttpResponse(' Empty context! Add coordinates with mouse click! ') # GET request
+		#return render(request, 'coords.html', context)
+
 	st_query = StainerModel.objects.all()
 	context = {'st_query': st_query}
 	
 	return render(request, 'coords.html', context)
 
+
+def delete_coords(request):
+	try:
+		# Delete data (coords,color%)
+		StainerModel.objects.all().delete()
+		# Delete images
+		os.remove('static//images//prepared.png')
+		os.remove('static//images//stain.png')
+		os.remove('static//images//pie_st.png')
+	except:
+		pass
+	
+	return redirect('/stainerpx/')
 
 def clear_data(request):
 	Projectname.objects.all().delete()
