@@ -27,7 +27,7 @@ SECRET_KEY = 'w9s7e(#_@+i!s@vru@fu0c49l*$1tdtf6glfgzp@!bgxy8ndn_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*'] #['https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -136,3 +136,5 @@ django_heroku.settings(locals())
 # Postgre ?
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
