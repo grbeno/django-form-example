@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['*'] #['https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://web-production-90f1.up.railway.app', 'https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -142,3 +142,5 @@ options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-90f1.up.railway.app'] # railway
