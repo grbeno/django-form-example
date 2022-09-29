@@ -143,4 +143,4 @@ options.pop('sslmode', None)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-90f1.up.railway.app'] # railway
+CSRF_TRUSTED_ORIGINS = ['https://stainerpx.up.railway.app/'] # railway
