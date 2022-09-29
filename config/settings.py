@@ -138,7 +138,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #django_heroku.settings(locals()) # off in railway
 
 # Postgres ?
-# options = DATABASES['default'].get('OPTIONS', {})
-# options.pop('sslmode', None)
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
