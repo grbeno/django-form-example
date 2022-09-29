@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['web-production-90f1.up.railway.app', 'https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['stainerpx.up.railway.app', 'https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
