@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os 
-import django_heroku
+#import django_heroku # off in railway
 import dj_database_url
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w9s7e(#_@+i!s@vru@fu0c49l*$1tdtf6glfgzp@!bgxy8ndn_'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['*'] #['https://formexample.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -79,7 +82,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 db_config = dj_database_url.config(conn_max_age=600)
 if db_config:
-    # Postgre @ heroku:
+    # Postgres @ heroku, railway:
     DATABASES = {}
     DATABASES['default'] =  db_config
 else:
@@ -127,14 +130,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('static')),]  #[BASE_DIR / "static",'/var/www/static/',] 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals()) # off in railway
 
-# Postgre ?
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+# Postgres ?
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
