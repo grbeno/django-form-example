@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+pie_st.png
+prepared.png
+stain.png
+
 # Distribution / packaging
 .Python
 build/
